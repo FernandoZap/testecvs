@@ -1,0 +1,94 @@
+<!doctype html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <meta name="description" content="Simple MOOC : Uma simples plataforma de ensino a distancia" />
+    <title>Utilitários</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
+    <style>
+.tab_layout {font-size: 12px;text-align: center;}
+</style>
+
+</head>
+<body>
+<div class="header">
+
+
+<ul class="menuH decor1">
+
+
+<li><a href="#" class="arrow">1 Processamento da Folha</a>
+<ul>
+<li><a href="{% url 'app01:processarFolha' %}">1.1 Processamento da Folha</a></li>
+<li><a href="{% url 'app01:importar_excel_folha'  %}">1.2 Importar Excel (Folha)</a></li>
+
+            </ul>
+        </li>
+
+        <li><a href="#" class="arrow">2 Consultas</a>
+
+            <ul>
+            <li><a href="{% url 'app01:listSomaEventos' %}">2.1 Lista Soma por Eventos</a></li>            
+            <li><a href="#">2.2 Lista Soma por Setores</a></li>
+            <li><a href="{% url 'app01:folhasProcessadas'  %}">2.3 Folhas Processadas</a></li>
+            <li><a href="{% url 'app01:imprimirFolha' %}">2.5 Modelo Base Excel</a></li>
+            <li><a href="{% url 'app01:consultarSuporte' %}">2.6 Listar Suporte/Regente</a></li>
+            <li><a href="{% url 'app01:tabelaParticipacaoExcel' %}">2.7 3 EM 1 Regente-Suporte-Matriz</a></li>
+            <li><a href="{% url 'app01:listarParticipacaoAmpliacao' %}">2.7 Listar Participação/Ampliação</a></li>
+            </ul>
+        </li>
+
+
+<li><a href="#" class="arrow">3 Cadastro</a>
+            <ul>
+            <li><a href="{% url 'app01:gravarFuncao' %}">3.1 Cadastrar Funcoes</a></li>
+            <li><a href="{% url 'app01:listarModels_01' %}">3.2 Listar Tabelas</a></li>
+            <li><a href="{% url 'app01:cargahoraria' %}">3.3 Carga Horaria Errada</a></li>
+            <li><a href="{% url 'app01:listar_ch' %}">3.4 Listar CH Errada</a></li>
+            <li><a href="{% url 'app01:deletarFl'  %}">3.5 Apagar Folha Processada</a></li>
+            <li><a href="{% url 'app01:atualizar_salario' %}" >3.6 Atualizar Tabela de Salário</a></li>
+        </ul>
+
+        </li>
+        <li><a href="#" class="arrow">4 Layout's</a>
+            <ul>
+                  <li><a href="{% static 'imagens/layout_incluir_funcoes.gif' %}">4.1 Incluir Funções/Eventos</a></li>
+            </ul>
+        </li>
+
+
+        
+        {% if user.is_authenticated %}
+         <li><a href="{% url 'accounts:logout'  %}">3. Sair</a>
+         {% else %}
+         <li><a href="{% url 'accounts:login'  %}">3. Login</a>
+         {% endif %}
+        <!--
+        <li><a href="#3" class="arrow">3. Login</a>
+            <ul class="dropToLeft">
+                <li><a>3.1 Down Menu Deoms</a></li>
+                <li><a>3.2 Web Down Menu Instruction</a></li>
+                <li><a>3.3 Cross Browser Compatibility</a></li>
+                <li><a>3.4 Down Menu Directions</a></li>
+            </ul>
+        </li>
+        -->
+    </ul>
+
+  
+  </div>
+<div class="content">
+    {%  block content %} {% endblock %}
+    <div class="footer">
+        Utilitários WEB.
+     </div>
+  </div>
+  <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
+</body>
+</html>
+ 
+

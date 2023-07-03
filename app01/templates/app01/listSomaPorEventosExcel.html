@@ -1,0 +1,198 @@
+{% extends "app01/base_app01.html" %}
+{% load app_extras %}
+{% load humanize %}
+
+{% block conteudo %}
+<br/>
+
+<div class="container">
+<p align="center">{{ titulo }}</p>
+
+    
+   <form method="post">
+    {%csrf_token%}
+
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h1>{{ titulo }}</h1>
+   
+<div class="row">   
+
+<div class="form-group">
+      
+    
+    <div class="col">
+    <label for="id_municipio" class="col-form-label">Município</label>
+    <select name="municipio"  id="id_municipio" class="form-control">
+      <option value=""></option>
+      {% for municipio in municipios %}
+        <option value="{{ municipio.id_municipio }}">{{ municipio.municipio }}</option>
+      {% endfor %}
+    </select>   
+    </div>
+
+
+    <div class="col">
+    <label for="id_ano" class="col-form-label">Ano</label>
+    <select name="ano"  id="id_ano" class="form-control">
+      <option value=""></option>
+      <option value="2021" selected >2021</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+    </select>   
+
+    <label for="id_mes" class="col-form-label">Mes</label>
+    <select name="mes"  id="id_mes" class="form-control">
+      <option value=""></option>
+      <option value="01">Janeiro</option>
+      <option value="02">Fevereiro</option>
+      <option value="03">Marco</option>
+      <option value="04">Abril</option>
+      <option value="05">Maio</option>
+      <option value="06">JUnho</option>
+      <option value="07">Julho</option>
+      <option value="08">Agosto</option>
+      <option value="09">Setembro</option>
+      <option value="10">Outubro</option>
+      <option value="11">Novembro</option>
+      <option value="12">Dezembro</option>
+    </select>   
+
+    </div>
+    
+</div>    
+</div>  
+  
+  <br><br>
+
+
+    <p><span style="display:none">
+    <input type="submit" id="submit" value="Entrar 2" >
+    </span></p>
+
+
+    <p>
+    <button class="btn btn-success" id="bt_submit" onclick="fnSubmit();" >Executar</button>
+    </p>
+    <div id="msgDiv" style="display:none">Processo iniciado...</div>
+
+
+
+<script>
+function fnSubmit(){
+  document.getElementById("bt_submit").disabled=true;
+  document.getElementById("msgDiv").style.display = "block";
+  document.getElementById("submit").click();
+
+}
+</script>
+<style>
+#msgDiv {
+  width: 550px;
+  height: 150px;
+  background-color: lightblue;
+  font-size: 24px;
+}
+.departamento {
+  font-weight: 300;
+  color: blue;
+}
+
+.alignRigth {
+  text-align: right;
+}
+
+.tabela {
+  width: 850px;
+}
+
+.destaque {
+  font-weight: 300;
+  text-align: center;
+}
+
+.descricao {
+  font-weight: 300;
+  text-align: left;
+  width: 450px;
+  background-color: #EEE9E9;
+}
+
+
+.tabelaSoma {
+  width: 400px;
+}
+
+.titulo {
+  width: 600px;
+  color: blue;
+  font-size: 20px;
+}
+
+
+
+</style>
+
+   </form>
+
+
+
+
+   <p class="titulo">
+    {{ aviso }}
+   </p>
+   <hr>
+
+   {% if eventos %}
+
+   <p>
+      Resumo da Folha:
+   </p>
+   <p>
+    Município: {{ municipio }}
+    <br>
+    Competencia: {{ referencia}}
+   </p>
+
+   
+   <table><tr class="descricao"><th>Evento</th><th>Valor (R$)</th></tr>
+   {% for evento in eventos %}
+
+  <tr>
+    <td class="alignRigth" >{{ evento.evento  }} {{ evento.tipo  }}</td>
+    <td class="alignRigth" >{{ evento.valor  }}</td>
+  </tr>
+   {% endfor %} 
+
+ </table>
+ 
+
+ <hr>
+
+
+    <hr>
+    <p class="totais">Total Vantagens: {{ total_v }}</p>
+    <p class="totais">Total Descontos: {{ total_d }}</p>
+    <p class="totais">Valor Líquido: {{ total_r }} ========= Número de funcionários; {{ qT }} </p>
+
+   <hr><hr><hr>
+
+
+   {% endif %}
+
+
+   {% if resumo_depsetor is empty %}
+
+   <h1>{{ mensagem }}</h1>
+
+   {%   endif  %}
+
+   <hr>
+</div>
+{% endblock %}  
+   

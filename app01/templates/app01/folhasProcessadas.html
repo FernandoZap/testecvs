@@ -1,0 +1,144 @@
+{% extends "app01/base_app01.html" %}
+
+
+{% block conteudo %}
+<br/>
+
+<div class="container">
+<p align="center">{{ titulo }}</p>
+
+    
+   <form method="post">
+    {%csrf_token%}
+
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+   
+<div class="row">   
+
+<div class="form-group">
+
+  
+    
+    <div class="col">
+    <label for="id_municipio" class="col-form-label">Municípios</label>
+    <select name="municipio"  id="id_municipio" class="form-control" required>
+      <option value="0">Todos</option>
+      {% for municipio in municipios %}
+        <option value="{{ municipio.id_municipio }}">{{ municipio.municipio }}</option>
+    {% endfor %}        
+    </select>   
+    </div>
+
+    <div class="col">
+    <label for="id_empresa" class="col-form-label">Empresa</label>
+    <select name="empresa"  id="id_empresa" class="form-control" required>
+      <option value="Todas">Todas</option>
+        <option value="Aspec">Aspec</option>
+        <option value="Layout">Layout</option>
+        <option value="SS">SS</option>
+
+    </select>   
+    </div>
+
+
+    <input type='hidden' name="operacao" value='atualizar'>
+
+    <br>
+    <h2><span class="mensagem">{{ mensagem }}</span></h2>
+    
+</div>    
+</div>  
+  
+  <br><br>
+
+
+    <p><span style="display:none">
+    <input type="submit" id="submit" value="Entrar 2" >
+    </span></p>
+
+
+    <p>
+    <button class="btn btn-success" id="bt_submit" onclick="fnSubmit();" >Executar</button>
+    </p>
+    <div id="msgDiv" style="display:none">Processo iniciado...</div>
+
+
+
+<script>
+function fnSubmit(){
+  var dados_ok=0;
+  if (document.getElementById("filename").value!=""){
+      if (document.getElementById("id_municipio").value!=""){
+        if (document.getElementById("id_ano").value!=""){
+          if (document.getElementById("id_mes").value!=""){
+             dados_ok=1;
+          }
+        }
+      }
+   }
+   if (dados_ok==1){
+    document.getElementById("bt_submit").disabled=true;
+    document.getElementById("msgDiv").style.display = "block";
+    document.getElementById("submit").click();
+   }
+
+}
+</script>
+<style>
+#msgDiv {
+  width: 550px;
+  height: 150px;
+  background-color: lightblue;
+  font-size: 24px;
+}
+
+.mensagem {
+  color: red;
+
+}
+
+</style>
+
+   </form>
+
+   <hr>
+</div>
+</div>
+</div>
+
+
+   {% if lista_folha %}
+   <p>
+      {{ municipio }}<br>
+      {{ sel_empresa }}
+   </p>
+   
+   <table><tr class="descricao"><th>Item</th><th>Município</th><th>Mês Base</th><th>N.Servidores</th><th>Valor Total</th><th>Data do processamento</th></tr>
+   {% for folha in lista_folha %}
+
+  <tr>
+    <td class="alignRigth" >{{ folha.item  }}</td>
+    <td class="alignRigth" >{{ folha.municipio  }}</td>
+    <td class="alignRigth" >{{ folha.mesref  }}</td>
+    <td class="alignRigth" >{{ folha.quantidade  }}</td>
+    <td class="alignRigth" >{{ folha.valor  }}</td>
+    <td class="alignRigth" >{{ folha.data_criacao  }}</td>
+  </tr>
+   {% endfor %} 
+
+ </table>
+ {% endif %}
+ 
+
+ <hr>
+
+
+
+{% endblock %}

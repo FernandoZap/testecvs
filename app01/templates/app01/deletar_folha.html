@@ -1,0 +1,112 @@
+{% extends "app01/base_app01.html" %}
+
+
+{% block titulo %}
+  Importacao Folha
+{% endblock titulo %}
+
+
+{% block conteudo %}
+<br/>
+
+<div class="container">
+<p align="center">{{ titulo }}</p>
+
+
+   <form method="post">{%csrf_token%}
+
+    {%csrf_token%}
+
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h1>{{ titulo }}</h1>
+
+<div class="row">
+
+<div class="form-group">
+
+
+    <div class="col">
+    <label for="id_municipio" class="col-form-label">Município</label>
+    <select name="municipio"  id="id_municipio" class="form-control">
+      <option value=""></option>
+      {% for municipio in municipios %}
+        <option value="{{ municipio.id_municipio }}">{{ municipio.municipio }}</option>
+      {% endfor %}
+    </select>
+    </div>
+
+<div>
+    <label for="id_ano" class="col-form-label">Ano</label>
+    <select name="ano"  id="id_ano" class="form-control">
+      <option value=""></option>
+      <option value="2021">2021</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+    </select>
+</div>
+
+<div>
+    <label for="id_mes" class="col-form-label">Mes</label>
+    <select name="mes"  id="id_mes" class="form-control">
+      <option value=""></option>
+      <option value="1">Janeiro</option>
+      <option value="2">Fevereiro</option>
+      <option value="3">Marco</option>
+      <option value="4">Abril</option>
+      <option value="5">Maio</option>
+      <option value="6">Junho</option>
+      <option value="7">Julho</option>
+      <option value="8">Agosto</option>
+      <option value="9">Setembro</option>
+      <option value="10">Outubro</option>
+      <option value="11">Novembro</option>
+      <option value="12">Dezembro</option>
+    </select>
+</div>
+
+
+<br>
+
+</div>
+</div>
+
+
+  <br><br>
+
+
+    <p><span style="display:none">
+    <input type="submit" id="submit" value="Entrar 2" >
+    </span></p>
+
+    <p>
+    <button class="btn btn-success" id="bt_submit" onclick="fnSubmit();" >Executar</button>
+    </p>
+
+<hr>
+<div class="form-group">
+  <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Voltar</a>
+</div>
+
+
+    <div id="msgDiv" style="display:none">Processo iniciado...</div>
+
+<script>
+
+function fnSubmit(){
+  document.getElementById("bt_submit").disabled=true;
+  document.getElementById("msgDiv").style.display = "block";
+  document.getElementById("submit").click();
+}
+
+</script>
+
+
+   </form>
+</div>
+{% endblock conteudo %}

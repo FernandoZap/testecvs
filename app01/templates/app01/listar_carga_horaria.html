@@ -1,0 +1,39 @@
+{% extends "app01/base_app01.html" %}
+
+{% block titulo %}
+Listagens
+{% endblock titulo %}
+
+{% block conteudo %}
+<table class="table">
+<thead>
+  <tr>
+    <th>Item</th>
+     <th>Municipio</th>
+     <th>Funcao</th>
+     <th>Valor Venc.Base</th>
+     <th>CargaHoraria-Errada</th>
+     <th>CargaHoraria-Correta</th>
+  </tr> 
+</thead>
+<tbody>
+   {% for scat in lista %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+     <td>{{ scat.municipio }}</td>      
+     <td>{{ scat.funcao }}</td>
+     <td>{{ scat.valor }}</td>
+     <td>{{ scat.ch_errada }}</td>
+     <td>{{ scat.ch_certa }}</td>
+     <td><a href="{% url 'app01:remover_ch' scat.id %}">Remover</a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+<a href="{% url 'app01:cargahoraria' %}"><button class="btn btn-primary" >Cadastrar</button></a>
+<hr>
+<div class="form-group">
+  <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Voltar</a>
+
+{% endblock conteudo %}

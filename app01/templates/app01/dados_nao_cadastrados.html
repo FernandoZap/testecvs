@@ -1,0 +1,26 @@
+{% extends 'app01/base_app01.html' %}
+
+{% block conteudo %}
+<div>
+    <p>
+      Dados nao cadastrados:
+    </p>
+    <p>
+      Município: {{ municipio }}
+    </p>
+    <hr>
+   
+    <table><tr class="descricao"><th>Tabela</th><th>Descricao</th></tr>
+        {% for item in lista %}
+
+          <tr>
+                <td class="alignRigth" >{{ item.tabela  }}</td>
+                <td class="alignRigth" >{{ item.descricao  }}</td>
+          </tr>
+        {% endfor %} 
+
+    </table>
+ 
+</div>
+{% endblock %}  
+   

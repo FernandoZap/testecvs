@@ -1,0 +1,44 @@
+{% extends "app01/base_app01.html" %}
+
+{% block titulo %}
+Listagens
+{% endblock titulo %}
+
+{% block conteudo %}
+
+<p>
+Muncipio: {{ municipio }}
+<br>
+Tabela: {{ tabela }}
+</p>
+
+<table class="table">
+<thead>
+  <tr>
+    <th>Municipio</th>
+    <th>Tabela</th>
+     <th>Descricao_Qchega</th>
+     <th>Descricao_Qsai</th>
+     <th>Complemento</th>
+  </tr> 
+</thead>
+<tbody>
+   {% for ls in lista %}
+    <tr>
+     <td>{{ municipio }}</td>
+     <td>{{ tabela }}</td>
+     <td>{{ ls.descricao1 }}</td>      
+     <td>{{ ls.descricao2 }}</td>
+     <td>{{ ls.complemento }}</td>
+    </tr>
+
+
+    {% endfor %}
+</tbody>
+</table>
+
+<div class="form-group">
+  <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Voltar</a>
+
+{% endblock conteudo %}
+

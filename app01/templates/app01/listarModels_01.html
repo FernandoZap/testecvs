@@ -1,0 +1,140 @@
+{% extends 'app01/base_app01.html' %}
+
+
+{% block conteudo %}
+<br/>
+
+<div class="container">
+<p align="center">{{ titulo }}</p>
+
+    
+   <form method="post">
+    {%csrf_token%}
+
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+   
+<div class="row">   
+
+<div class="form-group">
+
+  
+    
+    <div class="col">
+    <label for="id_municipio" class="col-form-label">Municípios</label>
+    <select name="municipio"  id="id_municipio" class="form-control" required>
+      <option value=""></option>
+      {% for municipio in municipios %}
+        <option value="{{ municipio.id_municipio }}">{{ municipio.municipio }}</option>
+    {% endfor %}        
+    </select>   
+    </div>
+
+    <div class="col">
+    <label for="tabela" class="col-form-label">Tabela</label>
+    <select name="tabela"  id="tabela" class="form-control" required>
+      <option value=""></option>
+        <option value="Eventos">Eventos</option>
+        <option value="Funcoes">Funcoes</option>
+        <option value="Secretarias">Secretarias</option>
+        <option value="Setores">Setores</option>
+        <option value="Vinculos">Vinculos</option>
+        <option value="CH">Carga Horária</option>
+    </select>   
+    </div>
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="checkAmpliacao" name="ampliacao">
+  <label class="form-check-label" for="checkAmpliacao">
+    Ampliacao de CH (evento)
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="checkSuporte" name="suporte">
+  <label class="form-check-label" for="checkSuporte">
+    Suporte (evento)
+  </label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="checkCarater_Salario" name="carater_salario">
+  <label class="form-check-label" for="checkCarater_Salario">
+    Caratér Salário (evento)
+  </label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="checkPosgraduacao" name="pos_graduacao">
+  <label class="form-check-label" for="checkPosgraduacao">
+    Pos-graduação (evento)
+  </label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="checkCancelado" name="cancelado">
+  <label class="form-check-label" for="checkCancelado">
+    Cancelados (evento)
+  </label>
+</div>
+
+
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="checkProfessor" name="professor">
+  <label class="form-check-label" for="checkProfessor">
+    Professor (funcao)
+  </label>
+</div>    
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="checkFundeb" name="fundeb">
+  <label class="form-check-label" for="checkFundeb">
+    Fundeb (setor)
+  </label>
+</div>    
+
+
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="flexCheckChecked" name="apelido">
+  <label class="form-check-label" for="flexCheckChecked">
+    Nome trocado
+  </label>
+</div>    
+
+
+    <input type='hidden' name="operacao" value='atualizar'>
+
+    <br>
+    <h2><span class="mensagem">{{ mensagem }}</span></h2>
+    
+</div>    
+</div>  
+  
+  <br><br>
+
+
+    <p><span style="display:none">
+    <input type="submit" id="submit" value="Entrar 2" >
+    </span></p>
+
+
+    <p>
+    <button class="btn btn-success" id="bt_submit" >Executar</button>
+    </p>
+    
+   </form>
+
+   <hr>
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends "app01/base_app01.html" %}
+{% load app_extras %}
+
+{% block conteudo %}
+<br/>
+
+<div class="container">
+<p align="center">{{ titulo }}</p>
+
+    
+   <form id="form01"  action="" method="post">
+    {%csrf_token%}
+
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h1>{{ titulo }}</h1>
+   
+<div class="row">   
+
+<div class="form-group">
+      
+    
+    <div class="col">
+    <label for="id_municipio" class="col-form-label">Município</label>
+    <select name="municipio"  id="id_municipio" class="form-control" required>
+      <option value="0"></option>
+      {% for municipio in municipios %}
+        <option value="{{ municipio.id_municipio }}">{{ municipio.municipio }}</option>
+      {% endfor %}
+    </select>   
+    </div>
+
+
+    <label for="id_tabela" class="col-form-label">Tipo da Tabela</label>
+    <select name="tabela"  id="id_tabela" class="form-control" required>
+      <option value=""></option>
+      <option value="regente">Regente</option>
+      <option value="suporte">Suporte</option>
+    </select>   
+
+    <label for="id_ano" class="col-form-label">Ano</label>
+    <select name="ano"  id="id_ano" class="form-control" required>
+      <option value=""></option>
+      <option value="2021">2021</option>
+      <option value="2022" selected="">2022</option>
+      <option value="2023">2023</option>
+    </select>   
+
+    <label for="id_mes" class="col-form-label">Mes</label>
+    <select name="mes"  id="id_mes" class="form-control" required>
+      <option value=""></option>
+      <option value="01">Janeiro</option>
+      <option value="02">Fevereiro</option>
+      <option value="03">Marco</option>
+      <option value="04">Abril</option>
+      <option value="05">Maio</option>
+      <option value="06">JUnho</option>
+      <option value="07">Julho</option>
+      <option value="08">Agosto</option>
+      <option value="09">Setembro</option>
+      <option value="10">Outubro</option>
+      <option value="11">Novembro</option>
+      <option value="12">Dezembro</option>
+    </select> 
+
+
+<br>
+    <input class="form-check-input" type="checkbox" value="Excel" id="excel" name="modo">
+    <label class="form-check-label" for="excel">
+      No formato de Planilha Excel
+    </label>
+
+    
+</div>    
+</div>  
+  
+  <br><br>
+
+
+    <p><span style="display:none">
+    <input type="submit" id="submit" value="Entrar 2" >
+    </span></p>
+
+
+    <p>
+    <button class="btn btn-success" id="bt_submit" onclick="fnSubmit();" >Executar</button>
+    </p>
+    <div id="msgDiv" style="display:none">Processo iniciado...</div>
+
+<script>
+function fnSubmit(){
+if (document.getElementById("id_municipio").value!="0") {
+    if (document.getElementById("id_tabela").value!="") {    
+       if (document.getElementById("id_ano").value!="") {    
+          if (document.getElementById("id_mes").value!="") {
+              document.getElementById("bt_submit").disabled=true;   
+              document.getElementById("msgDiv").style.display = "block";
+              document.getElementById("submit").click();
+
+          }
+       }
+    }
+}    
+}
+
+</script>
+
+<style>
+#msgDiv {
+  width: 550px;
+  height: 150px;
+  background-color: lightblue;
+  font-size: 24px;
+}
+.departamento {
+  font-weight: 300;
+  color: blue;
+}
+
+.alignRigth {
+  text-align: right;
+}
+
+.tabela {
+  width: 850px;
+}
+
+.destaque {
+  font-weight: 300;
+  text-align: center;
+}
+
+.descricao {
+  font-weight: 300;
+  text-align: left;
+  width: 450px;
+  background-color: #EEE9E9;
+}
+
+
+.tabelaSoma {
+  width: 400px;
+}
+
+.titulo {
+  width: 600px;
+  color: blue;
+  font-size: 20px;
+}
+
+
+
+</style>
+
+   </form>
+
+{% endblock %}  
+   

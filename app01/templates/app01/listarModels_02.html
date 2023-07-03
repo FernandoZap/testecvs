@@ -1,0 +1,49 @@
+{% extends "app01/base_app01.html" %}
+
+{% block titulo %}
+Listagens
+{% endblock titulo %}
+
+{% block conteudo %}
+
+<p>
+Muncipio: {{ municipio }}
+<br>
+Tabela: {{ tabela }} {{ filtro}}
+<br>
+OBS: {{ obs}}
+</p>
+
+<table class="table">
+<thead>
+  <tr>
+    <th>Item</th>
+     <th>DescricaoQ_chega)</th>
+     <th>DescricaoQ_sai)</th>
+     <th>Complemento</th>
+     <th>Complemento</th>
+     <th>Carater Salario</th>
+     <th>Pos Graduacao</th>
+
+  </tr> 
+</thead>
+<tbody>
+   {% for ls in lista %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+     <td>{{ ls.descricao1 }}</td>      
+     <td>{{ ls.descricao2 }}</td>
+     <td>{{ ls.complemento1 }}</td>
+     <td>{{ ls.complemento2 }}</td>
+     <td>{{ ls.complemento3 }}</td>
+     <td>{{ ls.complemento4 }}</td>
+
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+<div class="form-group">
+  <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Voltar</a>
+
+{% endblock conteudo %}

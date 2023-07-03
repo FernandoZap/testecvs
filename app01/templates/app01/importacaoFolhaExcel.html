@@ -1,0 +1,162 @@
+{% extends "app01/base_app01.html" %}
+
+
+{% block conteudo %}
+<br/>
+
+<div class="container">
+<p align="center">{{ titulo }}</p>
+
+    
+   <form action="{% url 'app01:importacaoFolhaExcel' %}" method="post">
+    {%csrf_token%}
+
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+   
+<div class="row">   
+
+<div class="form-group">
+
+
+
+    <div class="col">
+    <label for="id_tabela" class="col-form-label">Selecione a Tabela</label>
+    <select name="tabela"  id="id_tabela" class="form-control" required>
+      <option value=""></option>
+      <option value="Secretaria">Secretarias</option>
+      <option value="Funcao">Funcao</option>
+      <option value="Evento">Evento</option>
+      <option value="Vinculos">Vinculos</option>
+      <option value="Setor">Setores</option>
+      <option value="Servidor">Servidores</option>
+      <option value="Folha">Folha</option>
+      <option value="Geral">Geral</option>
+      <option value=""></option>
+
+    </select>   
+    </div>
+
+      
+    
+    <div class="col">
+    <label for="id_municipio" class="col-form-label">MUNICÍPIOS</label>
+    <select name="municipio"  id="id_municipio" class="form-control" required>
+      <option value=""></option>
+      {% for municipio in municipios %}
+        <option value="{{ municipio.id_municipio }}">{{ municipio.municipio }}</option>
+    {% endfor %}        
+    </select>   
+    </div>
+
+    <input type='hidden' name="operacao" value='atualizar'>
+
+
+    <div class="col">
+    <label for="id_ano" class="col-form-label">Ano</label>
+    <select name="ano"  id="id_ano" class="form-control"  required>
+      <option value=""></option>
+      <option value="2021">2021</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+    </select>   
+
+    <label for="id_mes" class="col-form-label">Mes</label>
+    <select name="mes"  id="id_mes" class="form-control" required>
+      <option value=""></option>
+      <option value="01">Janeiro</option>
+      <option value="02">Fevereiro</option>
+      <option value="03">Marco</option>
+      <option value="04">Abril</option>
+      <option value="05">Maio</option>
+      <option value="06">JUnho</option>
+      <option value="07">Julho</option>
+      <option value="08">Agosto</option>
+      <option value="09">Setembro</option>
+      <option value="10">Outubro</option>
+      <option value="11">Novembro</option>
+      <option value="12">Dezembro</option>
+
+    </select> 
+
+
+    </div>
+
+    <br>
+    <h2><span class="mensagem">{{ mensagem }}</span></h2>
+    
+</div>    
+</div>  
+  
+  <br><br>
+
+
+    <p><span style="display:none">
+    <input type="submit" id="submit" value="Entrar 2" >
+    </span></p>
+
+
+    <p>
+    <button class="btn btn-success" id="bt_submit" onclick="fnSubmit();" >Executar</button>
+    </p>
+    <div id="msgDiv" style="display:none">Processo iniciado...</div>
+
+
+
+<script>
+function fnSubmit(){
+  var dados_ok=0;
+  if (document.getElementById("filename").value!=""){
+      if (document.getElementById("id_municipio").value!=""){
+        if (document.getElementById("id_ano").value!=""){
+          if (document.getElementById("id_mes").value!=""){
+             dados_ok=1;
+          }
+        }
+      }
+   }
+   if (dados_ok==1){
+    document.getElementById("bt_submit").disabled=true;
+    document.getElementById("msgDiv").style.display = "block";
+    document.getElementById("submit").click();
+   }
+
+}
+</script>
+<style>
+#msgDiv {
+  width: 550px;
+  height: 150px;
+  background-color: lightblue;
+  font-size: 24px;
+}
+
+.mensagem {
+  color: red;
+
+}
+
+</style>
+
+   </form>
+
+
+   <ul>
+   {% for deps in departamentos %}
+
+   <li>{{ deps.departamento }}</li>
+
+   {% endfor %}
+   </ul>
+
+   <hr>
+</div>
+</div>
+</div>
+{% endblock %}

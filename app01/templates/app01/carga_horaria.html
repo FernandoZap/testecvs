@@ -1,0 +1,421 @@
+{% extends "app01/base_app01.html" %}
+
+
+
+{% block titulo %}
+  Cadastro CargaHoraria
+{% endblock titulo %}
+
+
+{% block conteudo %}
+<br/>
+
+<div class="container">
+<p align="center">{{ titulo }}</p>
+
+    
+   <form id="form01"  action="" method="post">
+    {%csrf_token%}
+
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h1>{{ titulo }}</h1>
+   
+<div class="row">   
+    <div class="form-group">
+        <div class="col">
+        <label for="id_municipio" class="col-form-label">Município</label>
+        <select name="municipio"  id="id_municipio" class="form-control">
+           <option value=""></option>
+           {% for municipio in municipios %}
+           <option value="{{ municipio.id_municipio }}">{{ municipio.municipio }}</option>
+           {% endfor %}
+        </select>   
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="id_funcao1" class="col-form-label">Funcao</label>
+    <select name="funcao1"  id="funcao1" class="form-control" >
+      <option value="0"></option>
+    </select>
+    </div>
+
+  <div class="form-group col-md-2">
+    <label for="valor1" class="col-form-label">Vencimento</label>
+    <input type="text" id="valor1" name="valor1" class="form-control" />
+  </div>
+
+  <div class="form-group col-md-2">
+    <label for="cargahoraria_e1" class="col-form-label">Carga Horaria</label>
+    <select name="cargahoraria_e1"  id="cargahoraria_e1" class="form-control">
+      <option value=""></option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+      <option value="80">80</option>
+      <option value="100">100</option>
+      <option value="120">120</option>
+      <option value="150">150</option>
+      <option value="180">180</option>
+      <option value="200">200</option>
+      <option value="220">220</option>
+      <option value="250">250</option>
+    </select>   
+  </div>
+
+  <div class="form-group col-md-2">
+    <label for="cargahoraria_c1" class="col-form-label">Carga Horaria</label>
+    <select name="cargahoraria_c1"  id="cargahoraria_c1" class="form-control">
+      <option value=""></option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+      <option value="80">80</option>
+      <option value="100">100</option>
+      <option value="120">120</option>
+      <option value="150">150</option>
+      <option value="180">180</option>
+      <option value="200">200</option>
+      <option value="220">220</option>
+      <option value="250">250</option>
+    </select>   
+  </div>
+</div>
+
+</br>
+<div class="row">
+  <div class="form-group col-md-6">
+    <select name="funcao2"  id="funcao2" class="form-control" >
+      <option value="0"></option>
+    </select>
+  </div>
+
+  <div class="form-group col-md-2">
+    <input type="text" name="valor2" id="valor2" class="form-control" >
+  </div>
+
+  <div class="form-group col-md-2">
+    <select name="cargahoraria_e2"  id="cargahoraria_e2" class="form-control">
+      <option value=""></option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+      <option value="80">80</option>
+      <option value="100">100</option>
+      <option value="120">120</option>
+      <option value="150">150</option>
+      <option value="180">180</option>
+      <option value="200">200</option>
+      <option value="220">220</option>
+      <option value="250">250</option>
+    </select>     
+  </div>
+
+  <div class="form-group col-md-2">
+    <select name="cargahoraria_c2"  id="cargahoraria_c2" class="form-control">
+      <option value=""></option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+      <option value="80">80</option>
+      <option value="100">100</option>
+      <option value="120">120</option>
+      <option value="150">150</option>
+      <option value="180">180</option>
+      <option value="200">200</option>
+      <option value="220">220</option>
+      <option value="250">250</option>
+    </select>
+  </div>
+</div>
+</br>
+<div class="row">
+  <div class="form-group col-md-6">
+    <select name="funcao3"  id="funcao3" class="form-control" >
+      <option value="0"></option>
+    </select>
+    </div>
+
+  <div class="form-group col-md-2">
+    <input type="text" name="valor3" id="valor3" class="form-control" >
+  </div>
+
+  <div class="form-group col-md-2">
+    <select name="cargahoraria_e3"  id="cargahoraria_e3" class="form-control">
+      <option value=""></option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+      <option value="80">80</option>
+      <option value="100">100</option>
+      <option value="120">120</option>
+      <option value="150">150</option>
+      <option value="180">180</option>
+      <option value="200">200</option>
+      <option value="220">220</option>
+      <option value="250">250</option>
+    </select>         
+  </div>
+
+  <div class="form-group col-md-2">
+    <select name="cargahoraria_c3"  id="cargahoraria_c3" class="form-control">
+      <option value=""></option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+      <option value="80">80</option>
+      <option value="100">100</option>
+      <option value="120">120</option>
+      <option value="150">150</option>
+      <option value="180">180</option>
+      <option value="200">200</option>
+      <option value="220">220</option>
+      <option value="250">250</option>
+    </select>
+  </div>
+</div>
+</br>
+<div class="row">
+  <div class="form-group col-md-6">
+    <select name="funcao4"  id="funcao4" class="form-control" >
+      <option value="0"></option>
+    </select>
+    </div>
+
+  <div class="form-group col-md-2">
+    <input type="text" name="valor4" id="valor4" class="form-control" >
+  </div>
+
+  <div class="form-group col-md-2">
+    <select name="cargahoraria_e4"  id="cargahoraria_e4" class="form-control">
+      <option value=""></option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+      <option value="80">80</option>
+      <option value="100">100</option>
+      <option value="120">120</option>
+      <option value="150">150</option>
+      <option value="180">180</option>
+      <option value="200">200</option>
+      <option value="220">220</option>
+      <option value="250">250</option>
+    </select>         
+  </div>
+
+  <div class="form-group col-md-2">
+    <select name="cargahoraria_c4"  id="cargahoraria_c4" class="form-control">
+      <option value=""></option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+      <option value="80">80</option>
+      <option value="100">100</option>
+      <option value="120">120</option>
+      <option value="150">150</option>
+      <option value="180">180</option>
+      <option value="200">200</option>
+      <option value="220">220</option>
+      <option value="250">250</option>
+    </select>
+  </div>
+</div>
+
+<br>
+    
+</div>    
+
+
+  <br><br>
+
+
+    <p><span style="display:none">
+    <input type="submit" id="submit" value="Entrar 2" >
+    </span></p>
+
+    <p>
+    <button class="btn btn-success" id="bt_submit" onclick="fnSubmit();" >Executar</button>
+    </p>
+
+<hr>
+<div class="form-group">
+  <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Voltar</a>
+</div>
+
+
+    <div id="msgDiv" style="display:none">Processo iniciado...</div>
+
+
+
+
+
+<script>
+
+function fnSubmit(){
+  document.getElementById("bt_submit").disabled=true;
+  document.getElementById("msgDiv").style.display = "block";
+  document.getElementById("submit").click();
+}
+
+</script>
+
+<style>
+#msgDiv {
+  width: 550px;
+  height: 150px;
+  background-color: lightblue;
+  font-size: 24px;
+}
+.departamento {
+  font-weight: 300;
+  color: blue;
+}
+
+.alignRigth {
+  text-align: right;
+}
+
+.tabela {
+  width: 850px;
+}
+
+.destaque {
+  font-weight: 300;
+  text-align: center;
+}
+
+.descricao {
+  font-weight: 300;
+  text-align: left;
+  width: 450px;
+  background-color: #EEE9E9;
+}
+
+
+.tabelaSoma {
+  width: 400px;
+}
+
+.titulo {
+  width: 600px;
+  color: blue;
+  font-size: 20px;
+}
+
+
+</style>
+</form>
+
+
+<script>
+
+
+  $(function(){
+       $("#valor1").maskMoney({
+        prefix:'R$ ',
+        thousands: '.',
+        decimal: ','
+       });
+  })
+
+  $(function(){
+       $("#valor2").maskMoney({
+        prefix:'R$ ',
+        thousands: '.',
+        decimal: ','
+       });
+  })
+
+  $(function(){
+       $("#valor3").maskMoney({
+        prefix:'R$ ',
+        thousands: '.',
+        decimal: ','
+       });
+  })
+
+
+  $(function(){
+       $("#valor4").maskMoney({
+        prefix:'R$ ',
+        thousands: '.',
+        decimal: ','
+       });
+  })
+
+
+
+$(document).ready(function(){
+   var parametro1 = document.getElementById("id_municipio");
+
+$(parametro1).change(function(){
+    //alert("ok");
+    var param = document.getElementById("id_municipio");
+    var indice = param.options[param.selectedIndex].value;
+    $.ajax({
+      type: "GET",
+      url: "/app01/cargahoraria_ajax_01",
+      data: {
+        opcao: indice
+      },
+      success: function(data){
+      var parametro_funcao1 = document.getElementById("funcao1");
+      var parametro_funcao2 = document.getElementById("funcao2");
+      var parametro_funcao3 = document.getElementById("funcao3");
+      var parametro_funcao4 = document.getElementById("funcao4");
+      var key;
+      var valor;
+      for (i=0; i<data.length; i++){
+        //$('ul').append('<li>'+data[i]+'</li>');
+        if(i==0){
+            //var comboCidades = document.getElementById("cboCidades");
+            while (parametro_funcao1.length) {
+              parametro_funcao1.remove(0);
+              parametro_funcao2.remove(0);
+              parametro_funcao3.remove(0);
+              parametro_funcao4.remove(0);
+            }
+            
+            $(parametro_funcao1).append('<option value=0 selected></option>');
+            $(parametro_funcao2).append('<option value=0 selected></option>');
+            $(parametro_funcao3).append('<option value=0 selected></option>');
+            $(parametro_funcao4).append('<option value=0 selected></option>');
+            
+        }
+        //array = data[i].split(":");
+         $(parametro_funcao1).append('<option value='+data[i].key+'> '+data[i].value+'</option>');
+         $(parametro_funcao2).append('<option value='+data[i].key+'> '+data[i].value+'</option>');
+         $(parametro_funcao3).append('<option value='+data[i].key+'> '+data[i].value+'</option>');
+         $(parametro_funcao4).append('<option value='+data[i].key+'> '+data[i].value+'</option>');
+      }
+    }
+    });
+  });
+});
+</script>
+
+{% endblock conteudo %}  
+   
+
+
+
+
+
+

@@ -1,0 +1,176 @@
+{% extends "app01/base_app01.html" %}
+
+
+{% block titulo %}
+  Cadastro Salário
+{% endblock titulo %}
+
+
+{% block conteudo %}
+<br/>
+
+<div class="container">
+<p align="center">{{ titulo }}</p>
+
+
+   <form id="form01"  action="" method="post">
+    {%csrf_token%}
+
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h1>{{ titulo }}</h1>
+
+<div class="row">
+
+<div class="form-group">
+
+
+    <div class="col">
+    <label for="id_municipio" class="col-form-label">Município</label>
+    <select name="municipio"  id="id_municipio" class="form-control">
+      <option value=""></option>
+      {% for municipio in municipios %}
+        <option value="{{ municipio.id_municipio }}">{{ municipio.municipio }}</option>
+      {% endfor %}
+    </select>
+    </div>
+
+<div>
+    <label for="id_funcao" class="col-form-label">Funcao</label>
+    <select name="funcao"  id="id_funcao" class="form-control">
+      <option value=""></option>
+      {% for funcao in funcoes %}
+        <option value="{{ funcao.id_funcao }}">{{ funcao.funcao }}</option>
+      {% endfor %}
+        </select>
+</div>
+
+  <div class="form-row">
+     <div class="form-group col-md-6">
+        <label for="id_valor" class="col-form-label">Valor do Salário</label>
+     <input type="text" id="id_valor" name="valor_salario" class="form-control" />
+  </div>
+</div>
+
+<div>
+    <label for="id_cargahoraria" class="col-form-label">Carga-Horaria</label>
+    <select name="carga_horaria"  id="id_cargahoraria" class="form-control">
+      <option value=""></option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+      <option value="80">80</option>
+      <option value="100">100</option>
+      <option value="120">120</option>
+      <option value="150">150</option>
+      <option value="180">180</option>
+      <option value="200">200</option>
+      <option value="220">220</option>
+      <option value="250">250</option>
+    </select>
+
+</div>
+
+<br>
+
+</div>
+</div>
+
+
+  <br><br>
+
+
+    <p><span style="display:none">
+    <input type="submit" id="submit" value="Entrar 2" >
+    </span></p>
+
+    <p>
+    <button class="btn btn-success" id="bt_submit" onclick="fnSubmit();" >Executar</button>
+    </p>
+
+<hr>
+<div class="form-group">
+  <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Voltar</a>
+</div>
+
+
+    <div id="msgDiv" style="display:none">Processo iniciado...</div>
+
+<script>
+function fnSubmit(){
+  document.getElementById("bt_submit").disabled=true;
+  document.getElementById("msgDiv").style.display = "block";
+  document.getElementById("submit").click();
+}
+
+</script>
+
+
+<script>
+  $(function(){
+       $("#id_valor").maskMoney({
+        prefix:'R$ ',
+        thousands: '.',
+        decimal: ','
+       });
+  })
+
+</script>
+
+
+<style>
+#msgDiv {
+  width: 550px;
+  height: 150px;
+  background-color: lightblue;
+  font-size: 24px;
+}
+.departamento {
+  font-weight: 300;
+  color: blue;
+}
+
+.alignRigth {
+  text-align: right;
+}
+
+.tabela {
+  width: 850px;
+}
+
+.destaque {
+  font-weight: 300;
+  text-align: center;
+}
+
+.descricao {
+  font-weight: 300;
+  text-align: left;
+  width: 450px;
+  background-color: #EEE9E9;
+}
+
+
+.tabelaSoma {
+  width: 400px;
+}
+
+.titulo {
+  width: 600px;
+  color: blue;
+  font-size: 20px;
+}
+
+
+
+</style>
+
+   </form>
+</div>
+{% endblock conteudo %}

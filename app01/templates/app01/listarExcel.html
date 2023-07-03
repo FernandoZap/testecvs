@@ -1,0 +1,190 @@
+{% extends "app01/base_app01.html" %}
+
+
+{% block conteudo %}
+<br/>
+
+<div class="container">
+<p align="center">{{ titulo }}</p>
+
+    
+   <form  method="post">
+    {%csrf_token%}
+
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+   
+<div class="row">   
+
+<div class="form-group">
+
+  <div class="col">
+  <label for="id_municipio" class="col-form-label">Município</label>
+  <select name="municipio"  id="id_municipio" class="form-control" required>
+    <option value="0">Todos</option>
+    {% for municipio in municipios %}
+      <option value="{{ municipio.id_municipio }}">{{ municipio.municipio }}</option>
+    {% endfor %}
+  </select>   
+  </div>
+
+    <div class="col">
+    <label for="id_ano" class="col-form-label">Ano</label>
+    <select name="ano"  id="id_ano" class="form-control" required>
+      <option value="2000">Todos</option>
+      <option value="2021">2021</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+    </select>   
+  </div>
+    
+    <div class="col">
+    <label for="arquivo" class="col-form-label">Arquivos</label>
+    <select name="arquivo"  id="arquivo" class="form-control">
+      <option value=""></option>
+      {% for arquivo in arquivos %}
+        <option value="{{ arquivo }}">{{ arquivo }}</option>
+      {% endfor %}
+    </select>   
+    </div>
+
+
+    <h2><span class="mensagem">{{ mensagem }}</span></h2>
+
+</div>    
+</div>  
+  <br><br>
+
+
+    <p><span style="display:none">
+    <button class="btn btn-primary" type="submit" id="bt_submit">Button</button>
+    </span></p>
+
+
+    <p>
+      <a href="#" onclick="fnSubmit();">Executar</a>
+    </p>
+    <div id="msgDiv" style="display:none">Processo iniciado...</div>
+
+
+
+<script>
+
+function fnSubmit(){
+   document.getElementById("msgDiv").style.display = "block";
+   document.getElementById("bt_submit").click();
+
+}
+
+/*
+$(document).ready(function(){
+   var parametro1 = document.getElementById("id_municipio");
+    $(parametro1).change(function(){
+        var param = document.getElementById("id_municipio");
+        var param_ano = document.getElementById("id_ano");
+        var id_municipio = param.options[param.selectedIndex].value;
+        var id_ano = param_ano.options[param_ano.selectedIndex].value;
+        $.ajax({
+            type: "GET",
+            url: "/app01/listarExcel_ajax_01",
+            data: {
+                param1: id_municipio,
+                param2: id_ano
+            },
+            success: function(data){
+                 var parametro_arquivo = document.getElementById("arquivo");
+                 var key;
+                 var valor;
+                 for (i=0; i<data.length; i++){
+                     //$('ul').append('<li>'+data[i]+'</li>');
+                     if(i==0){
+                         //var comboCidades = document.getElementById("cboCidades");
+                         while (parametro_arquivo.length) {
+                              parametro_arquivo.remove(0);
+                         }
+                     }
+                     //array = data[i].split(":");
+                     $(parametro_arquivo).append('<option value='+data[i].key+'> '+data[i].value+'</option>');
+                  }
+            }
+        });
+    });
+});
+*/
+
+
+$(document).ready(function(){
+   var parametro1 = document.getElementById("id_municipio");
+   var parametro2 = document.getElementById("id_ano");
+
+    $(parametro1).change(function(){
+          func_ajax();
+     }); 
+    $(parametro2).change(function(){
+          func_ajax();
+     }); 
+});
+
+function func_ajax(){
+        var param = document.getElementById("id_municipio");
+        var param_ano = document.getElementById("id_ano");
+        var id_municipio = param.options[param.selectedIndex].value;
+        var id_ano = param_ano.options[param_ano.selectedIndex].value;
+        var parametro_arquivo = document.getElementById("arquivo");
+        while (parametro_arquivo.length) {
+            parametro_arquivo.remove(0);
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/app01/listarExcel_ajax_01",
+            data: {
+                param1: id_municipio,
+                param2: id_ano
+            },
+            success: function(data){
+                 var parametro_arquivo = document.getElementById("arquivo");
+                 var key;
+                 var valor;
+                 for (i=0; i<data.length; i++){
+                     //$('ul').append('<li>'+data[i]+'</li>');
+                     if(i==0){
+                         //var comboCidades = document.getElementById("cboCidades");
+                         while (parametro_arquivo.length) {
+                              parametro_arquivo.remove(0);
+                         }
+                     }
+                     //array = data[i].split(":");
+                     $(parametro_arquivo).append('<option value='+data[i].key+'> '+data[i].value+'</option>');
+                  }
+            }
+        });
+}
+
+
+</script>
+<style>
+#msgDiv {
+  width: 550px;
+  height: 150px;
+  background-color: lightblue;
+  font-size: 24px;
+}
+
+.mensagem {
+  color: red;
+
+}
+
+</style>
+
+   </form>
+   <hr>
+</div>
+{% endblock %}
+
